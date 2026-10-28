@@ -35,10 +35,39 @@ export function MathDisplay({ math, displayMode = false, className = "" }: MathD
 }
 
 /**
+ * Normalizes Markdown content to ensure robust KaTeX and CommonMark rendering:
+ * 1. Puts multiline $$ ... $$ blocks onto isolated lines (\n\n$$\n...\n$$\n\n) so that
+ *    remark-math does not treat LaTeX environments like \begin{aligned} as block info strings,
+ *    and properly detects closing delimiters.
+ * 2. Unindents math lines that start with 4+ spaces to prevent them from being parsed as indented code blocks.
+ */
+function normalizeMarkdownContent(content: string): string {
+  if (!content) return "";
+
+  // 1. Isolate multiline $$ math blocks
+  let text = content.replace(/\$\$([\s\S]+?)\$\$/g, (match, inner) => {
+    if (inner.includes("\n")) {
+      const trimmed = inner.trim();
+      return `\n\n$$\n${trimmed}\n$$\n\n`;
+    }
+    return match;
+  });
+
+  // 2. Unindent lines that start with 4+ spaces before $$ to avoid indented code block parsing
+  text = text.replace(/^[ \t]+(\$\$[\s\S]+?\$\$)/gm, (match, math) => {
+    return `\n\n${math.trim()}\n\n`;
+  });
+
+  return text;
+}
+
+/**
  * Rich Markdown + KaTeX parser that renders headings, lists, bold text, code blocks,
  * and math formulas ($math$ and $$math$$) with Claude editorial typography styling.
  */
 export function FormattedProse({ content, className = "" }: { content: string; className?: string }) {
+  const normalizedContent = useMemo(() => normalizeMarkdownContent(content), [content]);
+
   return (
     <div className={`prose-claude ${className}`}>
       <ReactMarkdown
@@ -95,6 +124,26 @@ export function FormattedProse({ content, className = "" }: { content: string; c
               {children}
             </blockquote>
           ),
+          table: ({ children }) => (
+            <div className="overflow-x-auto my-5 border border-claude-border dark:border-claude-darkBorder rounded-lg bg-white dark:bg-claude-darkSurface shadow-claude-sm">
+              <table className="w-full text-left text-xs font-sans">{children}</table>
+            </div>
+          ),
+          thead: ({ children }) => (
+            <thead className="bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border-b border-claude-border dark:border-claude-darkBorder text-claude-muted dark:text-claude-darkMuted font-mono">
+              {children}
+            </thead>
+          ),
+          th: ({ children }) => <th className="p-3.5 font-medium">{children}</th>,
+          tbody: ({ children }) => (
+            <tbody className="divide-y divide-claude-border/60 dark:divide-claude-darkBorder/60">{children}</tbody>
+          ),
+          tr: ({ children }) => (
+            <tr className="hover:bg-claude-bgSubtle/50 dark:hover:bg-claude-darkSurfaceElevated/50 transition-colors">
+              {children}
+            </tr>
+          ),
+          td: ({ children }) => <td className="p-3.5 text-claude-muted dark:text-claude-darkMuted">{children}</td>,
           code({ className, children, ...props }) {
             const isBlock = !className && String(children).includes("\n");
             return isBlock ? (
@@ -123,7 +172,7 @@ export function FormattedProse({ content, className = "" }: { content: string; c
           },
         }}
       >
-        {content}
+        {normalizedContent}
       </ReactMarkdown>
     </div>
   );

@@ -29,12 +29,14 @@ In February 2001, seventeen software luminaries (including Kent Beck, Ward Cunni
 
 They formulated **The Manifesto for Agile Software Development**, establishing four foundational value pairs:
 
-$$\\begin{aligned}
+$$
+\\begin{aligned}
 \\textbf{Individuals and interactions} &\\quad \\text{over} \\quad \\text{processes and tools} \\\\[2pt]
 \\textbf{Working software} &\\quad \\text{over} \\quad \\text{comprehensive documentation} \\\\[2pt]
 \\textbf{Customer collaboration} &\\quad \\text{over} \\quad \\text{contract negotiation} \\\\[2pt]
 \\textbf{Responding to change} &\\quad \\text{over} \\quad \\text{following a plan}
-\\end{aligned}$$
+\\end{aligned}
+$$
 
 *Crucial Caveat (Often asked in exams):* The authors explicitly noted that while there is value in the items on the right (tools, documentation, contracts, plans), **they value the items on the left more**.
 

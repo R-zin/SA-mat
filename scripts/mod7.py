@@ -106,11 +106,13 @@ Formulated by Dr. Barry W. Boehm in 1981 based on empirical analysis of 63 softw
 ### 🔢 Basic COCOMO Mathematical Equations
 The mathematical equations governing Basic COCOMO:
 
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Effort} &= a \times (\text{KLOC})^b \quad [\text{Person-Months}] \\[4pt]
 T_{\text{dev}} &= c \times (\text{Effort})^d \quad [\text{Calendar Months}] \\[4pt]
 \text{Average Staffing} &= \frac{\text{Effort}}{T_{\text{dev}}} \quad [\text{Engineers}]
-\end{aligned}$$
+\end{aligned}
+$$
 
 #### The Constants Table for Basic COCOMO:""",
                 "table": {
