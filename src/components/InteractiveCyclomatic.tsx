@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { GitBranch, ShieldCheck, AlertCircle, Cpu, Network } from "lucide-react";
+import { MathDisplay } from "./MathDisplay";
 
 export default function InteractiveCyclomatic() {
   const [edges, setEdges] = useState<number>(14);
@@ -17,20 +18,20 @@ export default function InteractiveCyclomatic() {
     if (val <= 10) {
       return {
         label: "Low Risk • High Testability",
-        color: "text-nordic-pine bg-nordic-pineBg border-nordic-pine",
-        recommendation: "Well-structured procedure. 100% basis path coverage is easily achievable.",
+        color: "text-claude-moss bg-claude-mossSubtle border-claude-mossBorder",
+        recommendation: "Well-structured procedure. 100% basis path branch coverage is easily achievable.",
       };
     } else if (val <= 20) {
       return {
         label: "Moderate Risk • Moderately Complex",
-        color: "text-nordic-amber bg-nordic-amber/10 border-nordic-amber",
+        color: "text-claude-clay bg-claude-claySubtle border-claude-clayBorder",
         recommendation: "Refactoring into smaller helper sub-routines recommended.",
       };
     } else {
       return {
         label: "High / Severe Risk • Untestable",
-        color: "text-red-700 bg-red-100 border-red-500 dark:bg-red-950 dark:text-red-300",
-        recommendation: "Crucial violation of structured design. Immediate decomposition mandatory.",
+        color: "text-red-700 bg-red-50 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800",
+        recommendation: "Severe violation of structured design. Immediate decomposition mandatory.",
       };
     }
   };
@@ -38,32 +39,32 @@ export default function InteractiveCyclomatic() {
   const risk = getRiskStatus(vgByFormula1);
 
   return (
-    <div className="bg-white dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded-lg p-6 shadow-sm my-6 transition-all">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-nordic-hairline dark:border-nordic-hairlineDark gap-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded bg-nordic-pineBg text-nordic-pine">
+    <div className="bg-white dark:bg-claude-darkSurface border border-claude-border dark:border-claude-darkBorder rounded-lg p-6 shadow-claude-sm my-6 transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-claude-border dark:border-claude-darkBorder gap-2">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-md bg-claude-claySubtle text-claude-clay border border-claude-clayBorder">
             <GitBranch className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-serif text-lg font-semibold text-nordic-spruce dark:text-gray-100">
-              McCabe Cyclomatic Complexity & CFG Explorer
+            <h3 className="font-serif text-lg font-normal text-claude-ink dark:text-white">
+              McCabe Cyclomatic Complexity &amp; CFG Formalism
             </h3>
-            <p className="text-xs text-nordic-slate">
-              Graph theory verification of basis execution paths and branch coverage bounds
+            <p className="text-xs text-claude-muted dark:text-claude-darkMuted">
+              Graph-theoretic derivation of linearly independent basis execution paths
             </p>
           </div>
         </div>
-        <div className={`px-2.5 py-1 text-xs font-mono font-semibold rounded border ${risk.color}`}>
+        <div className={`px-2.5 py-1 text-xs font-mono font-medium rounded-md border ${risk.color}`}>
           {risk.label}
         </div>
       </div>
 
       {/* Control Sliders */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 bg-nordic-frost dark:bg-nordic-darkSurfaceElevated p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated p-4 rounded-md border border-claude-border dark:border-claude-darkBorder">
         <div>
           <div className="flex justify-between text-xs mb-1 font-mono">
-            <span className="text-nordic-slate">Edges (E) in CFG:</span>
-            <span className="font-bold text-nordic-spruce dark:text-white">{edges}</span>
+            <span className="text-claude-muted dark:text-claude-darkMuted">Edges (E) in CFG:</span>
+            <span className="font-medium text-claude-ink dark:text-white">{edges}</span>
           </div>
           <input
             type="range"
@@ -71,14 +72,14 @@ export default function InteractiveCyclomatic() {
             max="40"
             value={edges}
             onChange={(e) => setEdges(Number(e.target.value))}
-            className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-pine"
+            className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-clay"
           />
         </div>
 
         <div>
           <div className="flex justify-between text-xs mb-1 font-mono">
-            <span className="text-nordic-slate">Nodes (N) in CFG:</span>
-            <span className="font-bold text-nordic-spruce dark:text-white">{nodes}</span>
+            <span className="text-claude-muted dark:text-claude-darkMuted">Nodes (N) in CFG:</span>
+            <span className="font-medium text-claude-ink dark:text-white">{nodes}</span>
           </div>
           <input
             type="range"
@@ -86,14 +87,14 @@ export default function InteractiveCyclomatic() {
             max="30"
             value={nodes}
             onChange={(e) => setNodes(Number(e.target.value))}
-            className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-polar"
+            className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-moss"
           />
         </div>
 
         <div>
           <div className="flex justify-between text-xs mb-1 font-mono">
-            <span className="text-nordic-slate">Decision Predicates (P):</span>
-            <span className="font-bold text-nordic-amber">{predicates}</span>
+            <span className="text-claude-muted dark:text-claude-darkMuted">Decision Predicates (P):</span>
+            <span className="font-medium text-claude-clay">{predicates}</span>
           </div>
           <input
             type="range"
@@ -101,47 +102,51 @@ export default function InteractiveCyclomatic() {
             max="25"
             value={predicates}
             onChange={(e) => setPredicates(Number(e.target.value))}
-            className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-amber"
+            className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-clay"
           />
         </div>
       </div>
 
-      {/* Visual Calculation Cards */}
+      {/* Visual Calculation Cards with KaTeX Math Rendering */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
-        <div className="p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark bg-white dark:bg-nordic-darkSurface">
-          <div className="text-xs font-mono text-nordic-slate mb-1">Method 1: Graph-Theoretic Formula</div>
-          <div className="text-sm font-mono font-semibold text-nordic-spruce dark:text-gray-200">
-            V(G) = E − N + 2(P)
+        <div className="p-4 rounded-md border border-claude-border dark:border-claude-darkBorder bg-white dark:bg-claude-darkSurface shadow-claude-sm">
+          <div className="text-xs font-mono text-claude-muted dark:text-claude-darkMuted mb-1">
+            Theorem 1: Graph-Theoretic Euler Formula
           </div>
-          <div className="mt-2 text-2xl font-serif font-bold text-nordic-pine">
-            {edges} − {nodes} + 2({connected}) ={" "}
-            <span className="text-3xl font-extrabold text-nordic-spruce dark:text-white">{vgByFormula1}</span>
+          <div className="py-1">
+            <MathDisplay math="V(G) = E - N + 2P" displayMode={false} className="text-sm font-serif" />
           </div>
-          <div className="text-[11px] text-nordic-slate mt-1 font-sans">
+          <div className="mt-2 text-xl font-serif text-claude-ink dark:text-white flex items-center gap-2">
+            <span>{edges} − {nodes} + 2({connected}) =</span>
+            <span className="text-2xl font-bold text-claude-clay">{vgByFormula1}</span>
+          </div>
+          <div className="text-[11px] text-claude-muted dark:text-claude-darkMuted mt-1 font-sans">
             Guarantees exactly {vgByFormula1} linearly independent basis paths.
           </div>
         </div>
 
-        <div className="p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark bg-white dark:bg-nordic-darkSurface">
-          <div className="text-xs font-mono text-nordic-slate mb-1">Method 2: Predicate Node Counting</div>
-          <div className="text-sm font-mono font-semibold text-nordic-spruce dark:text-gray-200">
-            V(G) = Number of Predicate Nodes + 1
+        <div className="p-4 rounded-md border border-claude-border dark:border-claude-darkBorder bg-white dark:bg-claude-darkSurface shadow-claude-sm">
+          <div className="text-xs font-mono text-claude-muted dark:text-claude-darkMuted mb-1">
+            Theorem 2: Predicate Node Counting
           </div>
-          <div className="mt-2 text-2xl font-serif font-bold text-nordic-amber">
-            {predicates} + 1 ={" "}
-            <span className="text-3xl font-extrabold text-nordic-spruce dark:text-white">{vgByFormula2}</span>
+          <div className="py-1">
+            <MathDisplay math="V(G) = P_{\text{predicates}} + 1" displayMode={false} className="text-sm font-serif" />
           </div>
-          <div className="text-[11px] text-nordic-slate mt-1 font-sans">
-            Counts branch points: if, while, for, and each boolean short-circuit condition.
+          <div className="mt-2 text-xl font-serif text-claude-ink dark:text-white flex items-center gap-2">
+            <span>{predicates} + 1 =</span>
+            <span className="text-2xl font-bold text-claude-clay">{vgByFormula2}</span>
+          </div>
+          <div className="text-[11px] text-claude-muted dark:text-claude-darkMuted mt-1 font-sans">
+            Counts branch points: if, while, for, and compound conditions.
           </div>
         </div>
       </div>
 
       {/* Code Sample Demonstration */}
-      <div className="p-3.5 bg-nordic-spruceDark dark:bg-black text-gray-200 rounded-lg font-mono text-xs overflow-x-auto leading-relaxed border border-nordic-hairlineDark">
-        <div className="text-nordic-slate text-[11px] mb-2 flex items-center justify-between">
+      <div className="p-4 bg-[#23201C] text-[#EAE5DD] rounded-md font-mono text-xs overflow-x-auto leading-relaxed border border-claude-border dark:border-claude-darkBorder shadow-claude-sm">
+        <div className="text-[#A39B91] text-[11px] mb-2 flex items-center justify-between">
           <span>Control Flow Graph (CFG) Node Mapping Demo</span>
-          <span className="text-nordic-pine font-semibold">McCabe Target: V(G) ≤ 10</span>
+          <span className="text-claude-clay font-medium">Standard Ceiling: V(G) ≤ 10</span>
         </div>
         <pre>
           <code>{`1: function evaluateCreditApplication(applicant) {
@@ -158,8 +163,8 @@ export default function InteractiveCyclomatic() {
         </pre>
       </div>
 
-      <p className="text-xs text-nordic-slate mt-3 italic">
-        {risk.recommendation}
+      <p className="text-xs text-claude-muted dark:text-claude-darkMuted mt-3 italic font-serif">
+        Evaluation: {risk.recommendation}
       </p>
     </div>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Layers, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Table, Layers } from "lucide-react";
+import { MathDisplay } from "./MathDisplay";
 
 type Complexity = "low" | "avg" | "high";
 
@@ -51,42 +52,43 @@ export default function InteractiveFunctionPoints() {
   const fp = Math.round(ufp * vaf * 10) / 10;
 
   return (
-    <div className="bg-white dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded-lg p-6 shadow-sm my-6 transition-all">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-nordic-hairline dark:border-nordic-hairlineDark gap-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded bg-nordic-frost dark:bg-nordic-darkSurfaceElevated text-nordic-spruce dark:text-white border border-nordic-hairline dark:border-nordic-hairlineDark">
+    <div className="bg-white dark:bg-claude-darkSurface border border-claude-border dark:border-claude-darkBorder rounded-lg p-6 shadow-claude-sm my-6 transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-claude-border dark:border-claude-darkBorder gap-2">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-md bg-claude-claySubtle text-claude-clay border border-claude-clayBorder">
             <Table className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-serif text-lg font-semibold text-nordic-spruce dark:text-gray-100">
-              Albrecht Function Point (FP) Calculator
+            <h3 className="font-serif text-lg font-normal text-claude-ink dark:text-white">
+              Albrecht Function Point (FP) Synthesizer
             </h3>
-            <p className="text-xs text-nordic-slate">
-              Specification-based size metric independent of implementation programming language
+            <p className="text-xs text-claude-muted dark:text-claude-darkMuted">
+              Specification-based functional capability sizing independent of programming language
             </p>
           </div>
         </div>
         <div className="text-right">
-          <span className="text-xs font-mono text-nordic-slate">Formula:</span>{" "}
-          <span className="text-xs font-mono font-bold text-nordic-pine">
-            FP = UFP × [0.65 + 0.01 × ∑(Fi)]
-          </span>
+          <MathDisplay
+            math="FP = UFP \\times \\left[0.65 + 0.01 \\times \\sum_{i=1}^{14} F_i\\right]"
+            displayMode={false}
+            className="text-xs font-serif text-claude-clay"
+          />
         </div>
       </div>
 
       {/* FP Table */}
-      <div className="overflow-x-auto my-4 border border-nordic-hairline dark:border-nordic-hairlineDark rounded-lg">
+      <div className="overflow-x-auto my-4 border border-claude-border dark:border-claude-darkBorder rounded-lg shadow-claude-sm">
         <table className="w-full text-left text-xs font-sans">
-          <thead className="bg-nordic-frost dark:bg-nordic-darkSurfaceElevated border-b border-nordic-hairline dark:border-nordic-hairlineDark text-nordic-slate font-mono">
+          <thead className="bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border-b border-claude-border dark:border-claude-darkBorder text-claude-muted dark:text-claude-darkMuted font-mono">
             <tr>
-              <th className="p-3">Functional Component</th>
-              <th className="p-3 w-28">Count</th>
-              <th className="p-3 w-40">Complexity Rating</th>
-              <th className="p-3 w-28 text-center">Unit Weight</th>
-              <th className="p-3 w-32 text-right">Subtotal</th>
+              <th className="p-3.5">Functional Component</th>
+              <th className="p-3.5 w-28">Count</th>
+              <th className="p-3.5 w-40">Complexity Rating</th>
+              <th className="p-3.5 w-28 text-center">Unit Weight</th>
+              <th className="p-3.5 w-32 text-right">Subtotal</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-nordic-hairline/60 dark:divide-nordic-hairlineDark/60 font-mono">
+          <tbody className="divide-y divide-claude-border/60 dark:divide-claude-darkBorder/60 font-mono">
             {(Object.keys(WEIGHTS) as (keyof typeof WEIGHTS)[]).map((key) => {
               const item = WEIGHTS[key];
               const comp = complexities[key];
@@ -94,11 +96,14 @@ export default function InteractiveFunctionPoints() {
               const subtotal = (counts[key] || 0) * weight;
 
               return (
-                <tr key={key} className="hover:bg-nordic-frost/50 dark:hover:bg-nordic-darkSurfaceElevated/50">
-                  <td className="p-3 font-medium text-nordic-spruce dark:text-gray-200">
+                <tr
+                  key={key}
+                  className="hover:bg-claude-bgSubtle/50 dark:hover:bg-claude-darkSurfaceElevated/50 transition-colors"
+                >
+                  <td className="p-3.5 font-medium text-claude-ink dark:text-gray-200 font-sans">
                     {item.label}
                   </td>
-                  <td className="p-3">
+                  <td className="p-3.5">
                     <input
                       type="number"
                       min="0"
@@ -107,36 +112,36 @@ export default function InteractiveFunctionPoints() {
                       onChange={(e) =>
                         setCounts({ ...counts, [key]: Math.max(0, parseInt(e.target.value) || 0) })
                       }
-                      className="w-20 px-2 py-1 bg-nordic-frost dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded text-xs font-bold text-nordic-spruce dark:text-white"
+                      className="w-20 px-2 py-1 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border border-claude-border dark:border-claude-darkBorder rounded text-xs font-medium text-claude-ink dark:text-white"
                     />
                   </td>
-                  <td className="p-3">
+                  <td className="p-3.5">
                     <select
                       value={comp}
                       onChange={(e) =>
                         setComplexities({ ...complexities, [key]: e.target.value as Complexity })
                       }
-                      className="px-2 py-1 bg-nordic-frost dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded text-xs font-sans text-nordic-spruce dark:text-white"
+                      className="px-2 py-1 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border border-claude-border dark:border-claude-darkBorder rounded text-xs font-sans text-claude-ink dark:text-white"
                     >
                       <option value="low">Low ({item.low})</option>
                       <option value="avg">Average ({item.avg})</option>
                       <option value="high">High ({item.high})</option>
                     </select>
                   </td>
-                  <td className="p-3 text-center text-nordic-slate">{weight}</td>
-                  <td className="p-3 text-right font-bold text-nordic-pine dark:text-green-400">
+                  <td className="p-3.5 text-center text-claude-muted">{weight}</td>
+                  <td className="p-3.5 text-right font-medium text-claude-clay dark:text-[#E89274]">
                     {subtotal} FP
                   </td>
                 </tr>
               );
             })}
           </tbody>
-          <tfoot className="bg-nordic-frost dark:bg-nordic-darkSurfaceElevated border-t border-nordic-hairline dark:border-nordic-hairlineDark font-mono font-bold">
+          <tfoot className="bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border-t border-claude-border dark:border-claude-darkBorder font-mono font-medium">
             <tr>
-              <td colSpan={4} className="p-3 text-right text-nordic-slate">
+              <td colSpan={4} className="p-3.5 text-right text-claude-muted font-sans">
                 Total Unadjusted Function Points (UFP):
               </td>
-              <td className="p-3 text-right text-base text-nordic-spruce dark:text-white">
+              <td className="p-3.5 text-right text-base text-claude-ink dark:text-white font-bold">
                 {ufp} UFP
               </td>
             </tr>
@@ -145,13 +150,13 @@ export default function InteractiveFunctionPoints() {
       </div>
 
       {/* GSC Influence Slider */}
-      <div className="bg-nordic-frost dark:bg-nordic-darkSurfaceElevated p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark my-4">
+      <div className="bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated p-4 rounded-md border border-claude-border dark:border-claude-darkBorder my-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs mb-2">
-          <span className="text-nordic-slate font-medium">
+          <span className="text-claude-muted dark:text-claude-darkMuted font-medium">
             Sum of 14 General System Characteristics (∑ Fi):
           </span>
-          <span className="font-mono font-bold text-nordic-amber">
-            ∑ Fi = {tdi} (out of max 70) ➔ VAF = {vaf.toFixed(2)}
+          <span className="font-mono font-medium text-claude-clay">
+            ∑ Fi = {tdi} (max 70) ➔ VAF = {vaf.toFixed(2)}
           </span>
         </div>
         <input
@@ -160,28 +165,28 @@ export default function InteractiveFunctionPoints() {
           max="70"
           value={tdi}
           onChange={(e) => setTdi(Number(e.target.value))}
-          className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-amber"
+          className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-clay"
         />
-        <div className="flex justify-between text-[10px] text-nordic-slate font-mono mt-1">
-          <span>0 (No influence: VAF = 0.65)</span>
-          <span>35 (Average influence: VAF = 1.00)</span>
-          <span>70 (Max influence: VAF = 1.35)</span>
+        <div className="flex justify-between text-[10px] text-claude-muted font-mono mt-1">
+          <span>0 (VAF = 0.65)</span>
+          <span>35 (Nominal: VAF = 1.00)</span>
+          <span>70 (VAF = 1.35)</span>
         </div>
       </div>
 
       {/* Final Synthesized Metric Output */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-        <div className="p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark bg-white dark:bg-nordic-darkSurface text-center">
-          <span className="text-xs text-nordic-slate block">Unadjusted FP (UFP)</span>
-          <span className="font-serif text-3xl font-bold text-nordic-spruce dark:text-white">{ufp}</span>
+        <div className="p-4 rounded-md border border-claude-border dark:border-claude-darkBorder bg-white dark:bg-claude-darkSurface text-center shadow-claude-sm">
+          <span className="text-xs text-claude-muted dark:text-claude-darkMuted block">Unadjusted FP (UFP)</span>
+          <span className="font-serif text-3xl font-normal text-claude-ink dark:text-white">{ufp}</span>
         </div>
-        <div className="p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark bg-white dark:bg-nordic-darkSurface text-center">
-          <span className="text-xs text-nordic-slate block">Adjustment Factor (VAF)</span>
-          <span className="font-serif text-3xl font-bold text-nordic-amber">{vaf.toFixed(2)}x</span>
+        <div className="p-4 rounded-md border border-claude-border dark:border-claude-darkBorder bg-white dark:bg-claude-darkSurface text-center shadow-claude-sm">
+          <span className="text-xs text-claude-muted dark:text-claude-darkMuted block">Adjustment Factor (VAF)</span>
+          <span className="font-serif text-3xl font-normal text-claude-clay">{vaf.toFixed(2)}×</span>
         </div>
-        <div className="p-4 rounded-lg border-2 border-nordic-pine bg-nordic-pineBg/50 dark:bg-nordic-pine/20 text-center">
-          <span className="text-xs font-semibold text-nordic-pine dark:text-green-300 block">Final Adjusted FP</span>
-          <span className="font-serif text-3xl font-extrabold text-nordic-pine dark:text-green-400">{fp} FP</span>
+        <div className="p-4 rounded-md border-2 border-claude-clay bg-claude-claySubtle dark:bg-claude-claySubtle text-center shadow-claude-sm">
+          <span className="text-xs font-medium text-claude-clay dark:text-[#E89274] block">Final Adjusted FP</span>
+          <span className="font-serif text-3xl font-bold text-claude-clay dark:text-[#E89274]">{fp} FP</span>
         </div>
       </div>
     </div>

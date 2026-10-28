@@ -14,7 +14,7 @@ export const FLASHCARDS: Flashcard[] = [
     question: "What does McCabe's Cyclomatic Complexity M = E - N + 2P calculate, and what is the standard recommended ceiling?",
     hint: "Recall graph theory edges, nodes, and independent paths.",
     answer: "It computes the number of linearly independent paths through the program's Control Flow Graph (CFG), defining the minimum number of test cases required for 100% basis path branch coverage. The recommended upper bound is M <= 10; higher values indicate unmaintainable, error-prone modules.",
-    formula: "M = E - N + 2P = Predicate Nodes + 1"
+    formula: "M = E - N + 2P = \\text{Predicate Nodes} + 1"
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const FLASHCARDS: Flashcard[] = [
     question: "According to Putnam's Software Equation, how does cost/effort scale when delivery schedule is compressed?",
     hint: "Look at the relationship between Effort and td.",
     answer: "Effort varies inversely with the FOURTH POWER of development time: Effort ∝ 1 / (td^4). A relatively small schedule compression of 20% approximately doubles the required human effort and cost!",
-    formula: "Effort ∝ 1 / (t_d)^4"
+    formula: "\\text{Effort} \\propto \\frac{1}{t_d^4}"
   },
   {
     id: "5",
@@ -73,7 +73,7 @@ export const FLASHCARDS: Flashcard[] = [
     question: "In Basic COCOMO, what are the Effort and Development Time formulas for Organic Mode?",
     hint: "Parameters 2.4, 1.05, 2.5, 0.38.",
     answer: "Effort = 2.4 * (KLOC)^1.05 Person-Months\nNominal Development Time (Tdev) = 2.5 * (Effort)^0.38 Months\nAverage Staffing = Effort / Tdev persons.",
-    formula: "Effort = 2.4 × (KLOC)^1.05,  T_dev = 2.5 × (Effort)^0.38"
+    formula: "\\text{Effort} = 2.4 \\times (\\text{KLOC})^{1.05}, \\quad T_{\\text{dev}} = 2.5 \\times (\\text{Effort})^{0.38}"
   },
   {
     id: 10,
@@ -81,6 +81,6 @@ export const FLASHCARDS: Flashcard[] = [
     question: "What are the three essential Next.js configuration properties required for GitHub Pages static hosting?",
     hint: "Think export, base path, and images.",
     answer: "1. output: 'export' (generates static HTML/JS/CSS in out/ directory)\n2. basePath: '/<repo-name>' (ensures asset links resolve on GitHub Pages subpaths)\n3. images: { unoptimized: true } (disables server-side image optimizer since GitHub Pages is purely static)\n4. trailingSlash: true (prevents 404s on direct URL refreshes).",
-    formula: "output: 'export', basePath: '/<repo>', images: { unoptimized: true }"
+    formula: "\\mathtt{output: \\text{'export'}}, \\quad \\mathtt{basePath: \\text{'/<repo>'}}, \\quad \\mathtt{images.unoptimized: true}"
   }
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Terminal, Copy, Check, ExternalLink, Globe, ShieldCheck, AlertCircle, Server } from "lucide-react";
+import { Terminal, Copy, Check, ExternalLink, Globe, ShieldCheck, AlertCircle } from "lucide-react";
 
 export default function DeploymentGuide() {
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -47,13 +47,13 @@ export default nextConfig;`,
     },
     {
       num: 2,
-      title: "Create GitHub Actions Workflow (.github/workflows/deploy.yml)",
+      title: "Create GitHub Actions Workflow (.github/workflows/nextjs.yml)",
       desc: "Automates building Next.js static export and deploying directly to GitHub Pages CDN on every push to main.",
-      snippet: `name: Deploy Next.js to GitHub Pages
+      snippet: `name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -71,27 +71,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
           cache: npm
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Build Next.js Static Export
+      - name: Build with Next.js
         env:
           NEXT_PUBLIC_BASE_PATH: /\${{ github.event.repository.name }}
         run: npm run build
-
-      - name: Upload Artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
@@ -149,22 +144,22 @@ TTL: Auto / 3600
   ];
 
   return (
-    <div className="bg-white dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded-lg p-6 shadow-sm my-6 transition-all" id="deployment-guide">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-nordic-hairline dark:border-nordic-hairlineDark gap-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded bg-nordic-polar text-white">
+    <div className="bg-white dark:bg-claude-darkSurface border border-claude-border dark:border-claude-darkBorder rounded-lg p-6 shadow-claude-sm my-6 transition-all" id="deployment-guide">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-claude-border dark:border-claude-darkBorder gap-2">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-md bg-claude-clay text-white">
             <Terminal className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-serif text-lg font-semibold text-nordic-spruce dark:text-gray-100">
+            <h3 className="font-serif text-lg font-normal text-claude-ink dark:text-white">
               GitHub Pages Deployment Interactive Manual
             </h3>
-            <p className="text-xs text-nordic-slate">
+            <p className="text-xs text-claude-muted dark:text-claude-darkMuted">
               Complete production walkthrough for zero-downtime automated static export CI/CD
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-nordic-pineBg text-nordic-pine font-mono text-xs font-semibold border border-nordic-pine/30">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-claude-mossSubtle text-claude-moss font-mono text-xs font-medium border border-claude-mossBorder">
           <ShieldCheck className="w-4 h-4" />
           <span>Production Verified</span>
         </div>
@@ -176,10 +171,10 @@ TTL: Auto / 3600
           <button
             key={s.num}
             onClick={() => setActiveStep(s.num)}
-            className={`p-3 rounded-lg border text-left transition-all ${
+            className={`p-3 rounded-md border text-left transition-all ${
               activeStep === s.num
-                ? "border-nordic-pine bg-nordic-pineBg text-nordic-pine dark:text-green-300 font-semibold ring-1 ring-nordic-pine"
-                : "border-nordic-hairline dark:border-nordic-hairlineDark bg-nordic-frost dark:bg-nordic-darkSurfaceElevated text-nordic-slate hover:text-nordic-spruce dark:hover:text-white"
+                ? "border-claude-clay bg-claude-claySubtle text-claude-clay dark:text-[#E89274] font-medium ring-1 ring-claude-clay shadow-2xs"
+                : "border-claude-border dark:border-claude-darkBorder bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated text-claude-muted hover:text-claude-ink dark:hover:text-white"
             }`}
           >
             <div className="flex items-center justify-between text-xs font-mono mb-1">
@@ -198,33 +193,33 @@ TTL: Auto / 3600
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-serif text-base font-semibold text-nordic-spruce dark:text-gray-100">
+                <h4 className="font-serif text-base font-medium text-claude-ink dark:text-white">
                   Step {current.num}: {current.title}
                 </h4>
-                <p className="text-xs text-nordic-slate mt-0.5">{current.desc}</p>
+                <p className="text-xs text-claude-muted dark:text-claude-darkMuted mt-0.5">{current.desc}</p>
               </div>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-nordic-frost dark:bg-nordic-darkSurfaceElevated border border-nordic-hairline dark:border-nordic-hairlineDark text-nordic-slate">
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border border-claude-border dark:border-claude-darkBorder text-claude-muted">
                 {current.badge}
               </span>
             </div>
 
-            {/* Terminal / Code Window */}
-            <div className="rounded-lg overflow-hidden border border-nordic-spruceDark dark:border-nordic-hairlineDark bg-nordic-spruceDark dark:bg-black text-gray-200">
-              <div className="px-4 py-2 bg-nordic-polar/80 dark:bg-zinc-900 flex items-center justify-between border-b border-white/10 text-xs font-mono">
+            {/* Terminal Window */}
+            <div className="rounded-lg overflow-hidden border border-claude-border dark:border-claude-darkBorder bg-[#23201C] text-[#EAE5DD] shadow-claude-sm">
+              <div className="px-4 py-2 bg-[#1A1815] flex items-center justify-between border-b border-[#35302B] text-xs font-mono">
                 <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                  <span className="text-nordic-slate ml-2 text-[11px]">{current.language.toUpperCase()}</span>
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#E57373]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFB74D]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#81C784]" />
+                  <span className="text-[#A39B91] ml-2 text-[11px]">{current.language.toUpperCase()}</span>
                 </div>
                 <button
                   onClick={() => handleCopy(current.snippet, `step-${current.num}`)}
-                  className="flex items-center gap-1 text-[11px] text-nordic-slate hover:text-white transition-colors"
+                  className="flex items-center gap-1 text-[11px] text-[#A39B91] hover:text-white transition-colors"
                 >
                   {copiedKey === `step-${current.num}` ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-nordic-pine" />
-                      <span className="text-nordic-pine font-semibold">Copied!</span>
+                      <Check className="w-3.5 h-3.5 text-claude-clay" />
+                      <span className="text-claude-clay font-medium">Copied!</span>
                     </>
                   ) : (
                     <>
@@ -243,27 +238,27 @@ TTL: Auto / 3600
       })()}
 
       {/* Troubleshooting Checklist Accordion */}
-      <div className="mt-6 pt-4 border-t border-nordic-hairline dark:border-nordic-hairlineDark">
-        <h4 className="text-xs font-mono uppercase tracking-wider text-nordic-slate font-bold mb-3 flex items-center gap-1.5">
-          <AlertCircle className="w-4 h-4 text-nordic-amber" />
+      <div className="mt-6 pt-4 border-t border-claude-border dark:border-claude-darkBorder">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-claude-muted dark:text-claude-darkMuted font-semibold mb-3 flex items-center gap-1.5">
+          <AlertCircle className="w-4 h-4 text-claude-clay" />
           Common GitHub Pages Pitfalls &amp; Solutions
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <div className="p-3 rounded border border-nordic-hairline dark:border-nordic-hairlineDark bg-nordic-frost dark:bg-nordic-darkSurfaceElevated">
-            <span className="font-semibold text-nordic-spruce dark:text-gray-200 block mb-1">
+          <div className="p-3.5 rounded-md border border-claude-border dark:border-claude-darkBorder bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated shadow-claude-sm">
+            <span className="font-serif font-semibold text-claude-ink dark:text-white block mb-1">
               Issue 1: 404 on Page Reload / Sub-routes
             </span>
-            <p className="text-nordic-slate">
-              <strong className="text-nordic-pine font-mono">Fix:</strong> Add <code className="bg-white dark:bg-black px-1 rounded">trailingSlash: true</code> to <code className="bg-white dark:bg-black px-1 rounded">next.config.mjs</code>. This forces generation of directory index files (<code className="bg-white dark:bg-black px-1 rounded">/path/index.html</code>) matching GitHub Pages URL mapping.
+            <p className="text-claude-muted dark:text-claude-darkMuted">
+              <strong className="text-claude-clay font-mono">Fix:</strong> Add <code className="bg-white dark:bg-black px-1 rounded text-claude-ink dark:text-white">trailingSlash: true</code> to <code className="bg-white dark:bg-black px-1 rounded text-claude-ink dark:text-white">next.config.mjs</code>. This forces generation of directory index files (<code className="bg-white dark:bg-black px-1 rounded text-claude-ink dark:text-white">/path/index.html</code>) matching GitHub Pages routing.
             </p>
           </div>
 
-          <div className="p-3 rounded border border-nordic-hairline dark:border-nordic-hairlineDark bg-nordic-frost dark:bg-nordic-darkSurfaceElevated">
-            <span className="font-semibold text-nordic-spruce dark:text-gray-200 block mb-1">
+          <div className="p-3.5 rounded-md border border-claude-border dark:border-claude-darkBorder bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated shadow-claude-sm">
+            <span className="font-serif font-semibold text-claude-ink dark:text-white block mb-1">
               Issue 2: Broken CSS Styles &amp; Images
             </span>
-            <p className="text-nordic-slate">
-              <strong className="text-nordic-pine font-mono">Fix:</strong> Ensure <code className="bg-white dark:bg-black px-1 rounded">basePath: &apos;/SA-mat&apos;</code> matches the exact repository name casing. Never hardcode absolute root links like <code className="bg-white dark:bg-black px-1 rounded">href=&quot;/logo.png&quot;</code>; use Next.js Link or relative paths.
+            <p className="text-claude-muted dark:text-claude-darkMuted">
+              <strong className="text-claude-clay font-mono">Fix:</strong> Ensure <code className="bg-white dark:bg-black px-1 rounded text-claude-ink dark:text-white">basePath: &apos;/SA-mat&apos;</code> matches the exact repository name casing. Never hardcode absolute root links; use Next.js Link or relative paths.
             </p>
           </div>
         </div>

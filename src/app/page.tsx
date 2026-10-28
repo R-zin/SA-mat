@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-nordic-frost dark:bg-nordic-darkBg text-nordic-spruce dark:text-gray-100 transition-colors" id="top">
+    <div className="min-h-screen flex flex-col bg-claude-bg dark:bg-claude-darkBg text-claude-text dark:text-claude-darkText transition-colors font-sans selection:bg-claude-clay/20 selection:text-claude-ink dark:selection:text-white" id="top">
       {/* Top Header */}
       <Header
         activeModuleId={activeModuleId}
@@ -79,17 +79,17 @@ export default function Home() {
       {isMobileNavOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
           <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-xs"
+            className="fixed inset-0 bg-claude-ink/40 backdrop-blur-xs"
             onClick={() => setIsMobileNavOpen(false)}
           />
-          <div className="relative w-80 max-w-[85vw] bg-white dark:bg-nordic-darkSurface h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200">
-            <div className="p-4 border-b border-nordic-hairline dark:border-nordic-hairlineDark flex items-center justify-between">
-              <span className="font-serif font-bold text-sm text-nordic-spruce dark:text-white">
-                Course Syllabus Navigation
+          <div className="relative w-80 max-w-[85vw] bg-claude-card dark:bg-claude-darkSurface h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200 border-r border-claude-border dark:border-claude-darkBorder">
+            <div className="p-4 border-b border-claude-border dark:border-claude-darkBorder flex items-center justify-between">
+              <span className="font-serif font-semibold text-sm text-claude-ink dark:text-claude-darkInk tracking-tight flex items-center gap-1.5">
+                <span className="text-claude-clay text-base">✳</span> Syllabus Navigation
               </span>
               <button
                 onClick={() => setIsMobileNavOpen(false)}
-                className="p-1.5 rounded hover:bg-nordic-frost text-nordic-slate"
+                className="p-1.5 rounded-md hover:bg-claude-bgSubtle dark:hover:bg-claude-darkCard text-claude-muted transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>

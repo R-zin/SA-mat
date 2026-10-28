@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Calculator, Sparkles, AlertTriangle, Users, Clock, Flame } from "lucide-react";
+import { Calculator, Sparkles, Users, Clock, Flame } from "lucide-react";
+import { MathDisplay } from "./MathDisplay";
 
 type CocomoMode = "organic" | "semidetached" | "embedded";
 
@@ -18,7 +19,7 @@ interface ModeParams {
 const MODES: Record<CocomoMode, ModeParams> = {
   organic: {
     name: "Organic Mode",
-    description: "Small teams, experienced engineers, familiar in-house environment, relaxed requirements.",
+    description: "Small teams, experienced engineers, familiar in-house environment, relaxed constraints.",
     aBasic: 2.4,
     bBasic: 1.05,
     cBasic: 2.5,
@@ -65,28 +66,28 @@ export default function InteractiveCocomo() {
   const staff = tdev > 0 ? Math.round((effort / tdev) * 10) / 10 : 0;
 
   return (
-    <div className="bg-white dark:bg-nordic-darkSurface border border-nordic-hairline dark:border-nordic-hairlineDark rounded-lg p-6 shadow-sm my-6 transition-all">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-nordic-hairline dark:border-nordic-hairlineDark gap-2">
-        <div className="flex items-center gap-2">
-          <div className="p-2 rounded bg-nordic-amber/10 text-nordic-amber">
+    <div className="bg-white dark:bg-claude-darkSurface border border-claude-border dark:border-claude-darkBorder rounded-lg p-6 shadow-claude-sm my-6 transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-claude-border dark:border-claude-darkBorder gap-2">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-md bg-claude-claySubtle text-claude-clay border border-claude-clayBorder">
             <Calculator className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="font-serif text-lg font-semibold text-nordic-spruce dark:text-gray-100">
-              Interactive Boehm COCOMO Simulator
+            <h3 className="font-serif text-lg font-normal text-claude-ink dark:text-white">
+              Boehm COCOMO Quantitative Synthesis
             </h3>
-            <p className="text-xs text-nordic-slate">
-              Parametric cost synthesis for Person-Months, Schedule, and Team Sizing
+            <p className="text-xs text-claude-muted dark:text-claude-darkMuted">
+              Parametric cost modeling for Person-Months, Development Time, and Staffing Sizing
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1 bg-nordic-frost dark:bg-nordic-darkSurfaceElevated p-1 rounded border border-nordic-hairline dark:border-nordic-hairlineDark text-xs font-mono">
+        <div className="flex items-center gap-1 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated p-1 rounded-md border border-claude-border dark:border-claude-darkBorder text-xs font-mono">
           <button
             onClick={() => setModelType("basic")}
             className={`px-3 py-1 rounded transition-colors ${
               modelType === "basic"
-                ? "bg-white dark:bg-nordic-polar text-nordic-spruce dark:text-white shadow-xs font-semibold"
-                : "text-nordic-slate hover:text-nordic-spruce dark:hover:text-white"
+                ? "bg-white dark:bg-claude-darkSurface text-claude-ink dark:text-white shadow-2xs font-medium"
+                : "text-claude-muted hover:text-claude-ink dark:hover:text-white"
             }`}
           >
             Basic COCOMO
@@ -95,8 +96,8 @@ export default function InteractiveCocomo() {
             onClick={() => setModelType("intermediate")}
             className={`px-3 py-1 rounded transition-colors ${
               modelType === "intermediate"
-                ? "bg-white dark:bg-nordic-polar text-nordic-spruce dark:text-white shadow-xs font-semibold"
-                : "text-nordic-slate hover:text-nordic-spruce dark:hover:text-white"
+                ? "bg-white dark:bg-claude-darkSurface text-claude-ink dark:text-white shadow-2xs font-medium"
+                : "text-claude-muted hover:text-claude-ink dark:hover:text-white"
             }`}
           >
             Intermediate COCOMO
@@ -113,28 +114,30 @@ export default function InteractiveCocomo() {
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={`p-3 text-left rounded-lg border transition-all ${
+              className={`p-3 text-left rounded-md border transition-all ${
                 isActive
-                  ? "border-nordic-pine bg-nordic-pineBg dark:bg-nordic-pine/20 text-nordic-pine dark:text-green-300 ring-1 ring-nordic-pine"
-                  : "border-nordic-hairline dark:border-nordic-hairlineDark bg-nordic-frost dark:bg-nordic-darkSurfaceElevated hover:border-nordic-slate/60 text-nordic-spruce dark:text-gray-200"
+                  ? "border-claude-clay bg-claude-claySubtle text-claude-clay dark:text-[#E89274] ring-1 ring-claude-clay shadow-2xs"
+                  : "border-claude-border dark:border-claude-darkBorder bg-claude-bgSubtle/50 dark:bg-claude-darkSurfaceElevated/50 hover:border-claude-muted text-claude-text dark:text-gray-200"
               }`}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="font-semibold text-xs font-mono">{item.name}</span>
-                {isActive && <Sparkles className="w-3.5 h-3.5 text-nordic-pine" />}
+                <span className="font-serif font-medium text-xs">{item.name}</span>
+                {isActive && <Sparkles className="w-3.5 h-3.5 text-claude-clay" />}
               </div>
-              <p className="text-[11px] text-nordic-slate leading-tight line-clamp-2">{item.description}</p>
+              <p className="text-[11px] text-claude-muted dark:text-claude-darkMuted leading-tight line-clamp-2">
+                {item.description}
+              </p>
             </button>
           );
         })}
       </div>
 
       {/* Sliders */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 bg-nordic-frost dark:bg-nordic-darkSurfaceElevated p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated p-4 rounded-md border border-claude-border dark:border-claude-darkBorder">
         <div>
           <div className="flex justify-between text-xs mb-1">
-            <span className="text-nordic-slate font-medium">Estimated Project Size (KLOC):</span>
-            <span className="font-mono font-bold text-nordic-spruce dark:text-white text-sm">
+            <span className="text-claude-muted dark:text-claude-darkMuted font-medium">Estimated Project Size (KLOC):</span>
+            <span className="font-mono font-medium text-claude-ink dark:text-white text-sm">
               {kloc} KLOC ({kloc * 1000} lines)
             </span>
           </div>
@@ -145,20 +148,20 @@ export default function InteractiveCocomo() {
             step="2"
             value={kloc}
             onChange={(e) => setKloc(Number(e.target.value))}
-            className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-pine"
+            className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-clay"
           />
-          <div className="flex justify-between text-[10px] text-nordic-slate font-mono mt-1">
-            <span>2 KLOC (Small)</span>
-            <span>150 KLOC (Medium)</span>
-            <span>300 KLOC (Large)</span>
+          <div className="flex justify-between text-[10px] text-claude-muted font-mono mt-1">
+            <span>2 KLOC</span>
+            <span>150 KLOC</span>
+            <span>300 KLOC</span>
           </div>
         </div>
 
         {modelType === "intermediate" && (
           <div>
             <div className="flex justify-between text-xs mb-1">
-              <span className="text-nordic-slate font-medium">Effort Adjustment Factor (EAF):</span>
-              <span className="font-mono font-bold text-nordic-amber text-sm">{eaf.toFixed(2)}x</span>
+              <span className="text-claude-muted dark:text-claude-darkMuted font-medium">Effort Adjustment Factor (EAF):</span>
+              <span className="font-mono font-medium text-claude-clay text-sm">{eaf.toFixed(2)}×</span>
             </div>
             <input
               type="range"
@@ -167,12 +170,12 @@ export default function InteractiveCocomo() {
               step="0.05"
               value={eaf}
               onChange={(e) => setEaf(Number(e.target.value))}
-              className="w-full h-2 bg-nordic-hairline dark:bg-nordic-hairlineDark rounded-lg appearance-none cursor-pointer accent-nordic-amber"
+              className="w-full h-1.5 bg-claude-border dark:bg-claude-darkBorder rounded-lg appearance-none cursor-pointer accent-claude-clay"
             />
-            <div className="flex justify-between text-[10px] text-nordic-slate font-mono mt-1">
-              <span>0.70x (Elite Team)</span>
-              <span>1.0x (Nominal)</span>
-              <span>1.50x (Ultra Critical)</span>
+            <div className="flex justify-between text-[10px] text-claude-muted font-mono mt-1">
+              <span>0.70× (Elite)</span>
+              <span>1.00× (Nominal)</span>
+              <span>1.50× (Critical)</span>
             </div>
           </div>
         )}
@@ -180,54 +183,59 @@ export default function InteractiveCocomo() {
 
       {/* Computed Results */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
-        <div className="bg-white dark:bg-nordic-darkSurface p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark text-center">
-          <div className="flex items-center justify-center gap-1.5 text-nordic-slate text-xs mb-1">
-            <Flame className="w-4 h-4 text-nordic-amber" />
+        <div className="bg-white dark:bg-claude-darkSurface p-4 rounded-md border border-claude-border dark:border-claude-darkBorder text-center shadow-claude-sm">
+          <div className="flex items-center justify-center gap-1.5 text-claude-muted dark:text-claude-darkMuted text-xs mb-1">
+            <Flame className="w-3.5 h-3.5 text-claude-clay" />
             <span>Human Effort</span>
           </div>
-          <div className="font-serif text-3xl font-bold text-nordic-spruce dark:text-white">
+          <div className="font-serif text-3xl text-claude-ink dark:text-white font-normal">
             {effort}
           </div>
-          <span className="text-[11px] text-nordic-slate font-mono">Person-Months (PM)</span>
+          <span className="text-[11px] text-claude-muted font-mono">Person-Months (PM)</span>
         </div>
 
-        <div className="bg-white dark:bg-nordic-darkSurface p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark text-center">
-          <div className="flex items-center justify-center gap-1.5 text-nordic-slate text-xs mb-1">
-            <Clock className="w-4 h-4 text-nordic-pine" />
+        <div className="bg-white dark:bg-claude-darkSurface p-4 rounded-md border border-claude-border dark:border-claude-darkBorder text-center shadow-claude-sm">
+          <div className="flex items-center justify-center gap-1.5 text-claude-muted dark:text-claude-darkMuted text-xs mb-1">
+            <Clock className="w-3.5 h-3.5 text-claude-clay" />
             <span>Development Schedule</span>
           </div>
-          <div className="font-serif text-3xl font-bold text-nordic-pine dark:text-green-400">
+          <div className="font-serif text-3xl text-claude-clay dark:text-[#E89274] font-normal">
             {tdev}
           </div>
-          <span className="text-[11px] text-nordic-slate font-mono">Calendar Months</span>
+          <span className="text-[11px] text-claude-muted font-mono">Calendar Months</span>
         </div>
 
-        <div className="bg-white dark:bg-nordic-darkSurface p-4 rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark text-center">
-          <div className="flex items-center justify-center gap-1.5 text-nordic-slate text-xs mb-1">
-            <Users className="w-4 h-4 text-nordic-polar" />
+        <div className="bg-white dark:bg-claude-darkSurface p-4 rounded-md border border-claude-border dark:border-claude-darkBorder text-center shadow-claude-sm">
+          <div className="flex items-center justify-center gap-1.5 text-claude-muted dark:text-claude-darkMuted text-xs mb-1">
+            <Users className="w-3.5 h-3.5 text-claude-moss" />
             <span>Average Staffing</span>
           </div>
-          <div className="font-serif text-3xl font-bold text-nordic-spruce dark:text-gray-100">
+          <div className="font-serif text-3xl text-claude-ink dark:text-white font-normal">
             {staff}
           </div>
-          <span className="text-[11px] text-nordic-slate font-mono">Full-Time Engineers</span>
+          <span className="text-[11px] text-claude-muted font-mono">Engineers</span>
         </div>
       </div>
 
-      {/* Mathematical Proof Step Breakdown */}
-      <div className="mt-4 p-3.5 bg-nordic-frost dark:bg-nordic-darkSurfaceElevated rounded border border-nordic-hairline dark:border-nordic-hairlineDark text-xs font-mono text-nordic-spruce dark:text-gray-300">
-        <div className="font-semibold text-nordic-pine mb-1">Mathematical Derivation:</div>
-        <div>
-          Effort = {a} × ({kloc})^{b} {modelType === "intermediate" ? `× ${eaf.toFixed(2)}` : ""} ={" "}
-          <strong className="text-nordic-amber">{effort} Person-Months</strong>
-        </div>
-        <div>
-          Tdev = {c} × ({effort})^{d} ={" "}
-          <strong className="text-nordic-pine">{tdev} Months</strong>
-        </div>
-        <div>
-          Avg Staff = Effort / Tdev = {effort} / {tdev} ={" "}
-          <strong className="text-nordic-spruce dark:text-white">{staff} Engineers</strong>
+      {/* Mathematical Proof Step Breakdown with KaTeX */}
+      <div className="mt-4 p-4 bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated rounded-md border border-claude-border dark:border-claude-darkBorder text-xs text-claude-text dark:text-gray-300">
+        <div className="font-serif font-semibold text-claude-clay mb-2">Step-by-Step Mathematical Derivation:</div>
+        <div className="space-y-1.5 overflow-x-auto py-1">
+          <div>
+            <MathDisplay
+              math={`\\text{Effort} = ${a} \\times (${kloc})^{${b}}${modelType === "intermediate" ? ` \\times ${eaf.toFixed(2)}` : ""} = \\mathbf{${effort}\\text{ PM}}`}
+            />
+          </div>
+          <div>
+            <MathDisplay
+              math={`T_{\\text{dev}} = ${c} \\times (${effort})^{${d}} = \\mathbf{${tdev}\\text{ Months}}`}
+            />
+          </div>
+          <div>
+            <MathDisplay
+              math={`\\text{Average Staff} = \\frac{\\text{Effort}}{T_{\\text{dev}}} = \\frac{${effort}}{${tdev}} = \\mathbf{${staff}\\text{ Engineers}}`}
+            />
+          </div>
         </div>
       </div>
     </div>

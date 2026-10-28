@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Trees, Search, Moon, Sun, Download, Menu, Terminal, BookOpen, GitBranch } from "lucide-react";
+import { Search, Moon, Sun, Download, Menu, Terminal, BookOpen, GitBranch } from "lucide-react";
 import { MODULES } from "@/data/modules";
 
 interface HeaderProps {
@@ -45,35 +45,35 @@ export default function Header({ activeModuleId, onOpenSearch, onToggleMobileNav
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 dark:bg-nordic-darkBg/95 backdrop-blur-md border-b border-nordic-hairline dark:border-nordic-hairlineDark transition-colors">
+    <header className="sticky top-0 z-40 bg-claude-bg/95 dark:bg-claude-darkBg/95 backdrop-blur-md border-b border-claude-border dark:border-claude-darkBorder transition-colors">
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         {/* Brand & Context */}
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleMobileNav}
-            className="lg:hidden p-2 rounded hover:bg-nordic-frost dark:hover:bg-nordic-darkSurface text-nordic-slate"
+            className="lg:hidden p-2 rounded hover:bg-claude-bgSubtle dark:hover:bg-claude-darkSurface text-claude-muted"
             aria-label="Toggle Navigation"
           >
             <Menu className="w-5 h-5" />
           </button>
 
           <a href="#top" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-lg bg-nordic-spruce dark:bg-nordic-polar text-white flex items-center justify-center border border-nordic-hairline/40 dark:border-nordic-hairlineDark shadow-xs transition-transform group-hover:scale-105">
-              <Trees className="w-5 h-5 text-green-300" />
+            <div className="w-8 h-8 rounded-md bg-claude-clay text-white flex items-center justify-center font-serif text-lg font-bold shadow-claude-sm transition-transform group-hover:scale-105">
+              ✳
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5">
-                <span className="font-serif text-base sm:text-lg font-bold text-nordic-spruce dark:text-white tracking-tight">
+                <span className="font-serif text-base sm:text-lg font-medium text-claude-ink dark:text-white tracking-tight">
                   CSE312 Architecture
                 </span>
-                <span className="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 rounded bg-nordic-pineBg text-nordic-pine dark:text-green-300 border border-nordic-pine/30 font-semibold">
+                <span className="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 rounded bg-claude-claySubtle text-claude-clay dark:text-[#E89274] border border-claude-clayBorder font-medium">
                   v2025.1
                 </span>
               </div>
-              <div className="hidden md:flex items-center gap-1 text-[11px] text-nordic-slate font-sans">
-                <span>Docs</span>
+              <div className="hidden md:flex items-center gap-1 text-[11px] text-claude-muted dark:text-claude-darkMuted font-sans">
+                <span>Atlas</span>
                 <span>/</span>
-                <span className="text-nordic-pine dark:text-green-300 font-medium truncate max-w-[260px]">
+                <span className="text-claude-clay dark:text-[#E89274] font-medium truncate max-w-[260px]">
                   Module 0{activeModule.number}: {activeModule.shortTitle}
                 </span>
               </div>
@@ -85,13 +85,13 @@ export default function Header({ activeModuleId, onOpenSearch, onToggleMobileNav
         <div className="flex-1 max-w-md hidden md:block">
           <button
             onClick={onOpenSearch}
-            className="w-full flex items-center justify-between px-3 py-1.5 text-xs text-nordic-slate bg-nordic-frost dark:bg-nordic-darkSurface rounded-lg border border-nordic-hairline dark:border-nordic-hairlineDark hover:border-nordic-pine transition-all"
+            className="w-full flex items-center justify-between px-3.5 py-1.5 text-xs text-claude-muted bg-white dark:bg-claude-darkSurface rounded-lg border border-claude-border dark:border-claude-darkBorder hover:border-claude-clay transition-all shadow-claude-sm"
           >
             <div className="flex items-center gap-2">
-              <Search className="w-4 h-4 text-nordic-slate" />
-              <span>Search formulas, metrics, ISO standards...</span>
+              <Search className="w-3.5 h-3.5 text-claude-muted" />
+              <span>Search treatises, formulas, ISO standards...</span>
             </div>
-            <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-white dark:bg-nordic-darkSurfaceElevated border border-nordic-hairline dark:border-nordic-hairlineDark rounded shadow-2xs">
+            <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-claude-bgSubtle dark:bg-claude-darkSurfaceElevated border border-claude-border dark:border-claude-darkBorder rounded text-claude-muted">
               ⌘K
             </kbd>
           </button>
@@ -101,7 +101,7 @@ export default function Header({ activeModuleId, onOpenSearch, onToggleMobileNav
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenSearch}
-            className="md:hidden p-2 rounded hover:bg-nordic-frost dark:hover:bg-nordic-darkSurface text-nordic-slate"
+            className="md:hidden p-2 rounded hover:bg-claude-bgSubtle dark:hover:bg-claude-darkSurface text-claude-muted"
             title="Search"
           >
             <Search className="w-5 h-5" />
@@ -109,30 +109,30 @@ export default function Header({ activeModuleId, onOpenSearch, onToggleMobileNav
 
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-nordic-frost dark:hover:bg-nordic-darkSurface text-nordic-slate hover:text-nordic-spruce dark:hover:text-white transition-colors"
-            title={isDark ? "Switch to Nordic Frost (Light)" : "Switch to Polar Night (Dark)"}
+            className="p-2 rounded-md hover:bg-claude-bgSubtle dark:hover:bg-claude-darkSurface text-claude-muted hover:text-claude-ink dark:hover:text-white transition-colors border border-transparent hover:border-claude-border"
+            title={isDark ? "Switch to Linen Light" : "Switch to Obsidian Dark"}
           >
-            {isDark ? <Sun className="w-5 h-5 text-amber-300" /> : <Moon className="w-5 h-5" />}
+            {isDark ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4" />}
           </button>
 
           <a
             href="https://github.com/R-zin/SA-mat"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-nordic-spruce dark:bg-nordic-polar text-white text-xs font-medium rounded-lg hover:bg-nordic-polar dark:hover:bg-nordic-spruce transition-all shadow-xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-claude-ink dark:bg-claude-darkSurfaceElevated text-white text-xs font-medium rounded-md hover:bg-claude-clay dark:hover:bg-claude-clay transition-all shadow-claude-sm border border-transparent hover:border-claude-clay"
           >
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
             </svg>
-            <span className="hidden sm:inline">GitHub Repo</span>
+            <span className="hidden sm:inline">Repository</span>
           </a>
         </div>
       </div>
 
-      {/* Dynamic Scroll Reading Progress Line */}
-      <div className="w-full bg-nordic-hairline/40 dark:bg-nordic-hairlineDark/60 h-0.5 overflow-hidden">
+      {/* Dynamic Scroll Reading Progress Line in Claude Terracotta */}
+      <div className="w-full bg-claude-border/40 dark:bg-claude-darkBorder/60 h-0.5 overflow-hidden">
         <div
-          className="bg-nordic-pine h-full transition-all duration-150"
+          className="bg-claude-clay h-full transition-all duration-150"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
