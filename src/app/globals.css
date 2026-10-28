@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Nordic custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c7ca;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2a3c44;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #73787a;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3e5661;
+}
+
+/* Scandinavian architectural blueprint grid */
+.nordic-grid-bg {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(194, 199, 202, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(194, 199, 202, 0.22) 1px, transparent 1px);
+}
+.dark .nordic-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(50, 75, 87, 0.22) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(50, 75, 87, 0.22) 1px, transparent 1px);
+}
+
+/* Code block highlight styles */
+pre code {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Print optimizations for exporting study sheets */
+@media print {
+  header, aside, .no-print {
+    display: none !important;
+  }
+  main {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
