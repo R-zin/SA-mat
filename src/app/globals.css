@@ -47,6 +47,9 @@
 }
 
 /* KaTeX Formula Styling Enhancements */
+.katex-mathml {
+  display: none !important;
+}
 .katex-display {
   margin: 1rem 0 !important;
   overflow-x: auto;

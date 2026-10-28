@@ -208,7 +208,7 @@ A standard university exam question asks: *"What is the relative effort distribu
                 "id": "iterative-waterfall",
                 "title": "1.4 Iterative Waterfall Model & Defect Amplification Economics",
                 "content": """### 🎯 Core Intuition ("Catch the Spark Before the Forest Burns")
-Suppose you are drafting the architectural blueprint for a bridge. If you make a mathematical error on day 1 (writing a beam thickness of 2 inches instead of 20 inches), fixing it on day 1 costs $0.50 (an eraser mark on paper). If you don't catch it and let the concrete trucks pour the foundation, fixing it requires demolition, jackhammers, millions of dollars, and lawsuits. **Phase Containment of Errors** means that software errors amplify exponentially in cost the longer they stay undetected in the development pipeline.
+Suppose you are drafting the architectural blueprint for a bridge. If you make a mathematical error on day 1 (writing a beam thickness of 2 inches instead of 20 inches), fixing it on day 1 costs 50 cents (an eraser mark on paper). If you don't catch it and let the concrete trucks pour the foundation, fixing it requires demolition, jackhammers, millions of dollars, and lawsuits. **Phase Containment of Errors** means that software errors amplify exponentially in cost the longer they stay undetected in the development pipeline.
 
 ---
 
@@ -245,13 +245,13 @@ A defect introduced during the Requirements phase does not stay as a single smal
 #### Relative Cost to Repair a Software Defect:
 Decades of empirical data (Barry Boehm, IBM, TRW) reveal the steep exponential cost of defect containment:""",
                 "table": {
-                    "headers": ["Phase Where Defect is Detected", "Relative Cost Multiplier", "Concrete Example Cost (Base: $100)"],
+                    "headers": ["Phase Where Defect is Detected", "Relative Cost Multiplier", "Concrete Example Cost (Base: 100 USD)"],
                     "rows": [
-                        ["Requirements Phase", "1x (Base)", "$100 (Edit two sentences in the SRS document)"],
-                        ["Design Phase", "5x - 6x", "$500 - $600 (Update UML diagrams, interface signatures)"],
-                        ["Coding Phase", "10x", "$1,000 (Rewrite class methods, re-run unit tests)"],
-                        ["System Testing Phase", "40x - 50x", "$4,000 - $5,000 (Re-execute entire regression test suite, re-integrate)"],
-                        ["Post-Release Operations / Maintenance", "100x - 200x", "$10,000 - $20,000+ (Emergency hotfix, data migration, liability, customer churn)"]
+                        ["Requirements Phase", "1x (Base)", "100 USD (Edit two sentences in the SRS document)"],
+                        ["Design Phase", "5x - 6x", "500 USD - 600 USD (Update UML diagrams, interface signatures)"],
+                        ["Coding Phase", "10x", "1,000 USD (Rewrite class methods, re-run unit tests)"],
+                        ["System Testing Phase", "40x - 50x", "4,000 USD - 5,000 USD (Re-execute entire regression test suite, re-integrate)"],
+                        ["Post-Release Operations / Maintenance", "100x - 200x", "10,000 USD - 20,000+ USD (Emergency hotfix, data migration, liability, customer churn)"]
                     ]
                 },
                 "callout": {

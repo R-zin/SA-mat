@@ -118,7 +118,7 @@ export default function ModuleView({ module, onNavigateModule }: ModuleViewProps
             </div>
 
             {/* Sub-section Prose with KaTeX inline math parsing */}
-            <div className="text-claude-text dark:text-claude-darkText text-sm sm:text-base leading-relaxed whitespace-pre-line font-sans font-normal">
+            <div className="text-claude-text dark:text-claude-darkText text-sm sm:text-base leading-relaxed font-sans font-normal">
               <FormattedProse content={sub.content} />
             </div>
 

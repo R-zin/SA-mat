@@ -241,7 +241,7 @@ When system behavior involves multiple interacting conditional variables, prose 
                 "id": "validation-evolution",
                 "title": "2.5 Requirements Validation, Traceability & The IEEE 830 Standard",
                 "content": """### 🎯 Core Intuition ("The Stamp of Legal Approval")
-Imagine buying a plot of land. Before you hand over $500,000, you have a land surveyor verify the boundary markers, a title company verify zero outstanding liens, and a city zoning officer confirm you are legally allowed to build there. That is **Requirements Validation**. Once approved, if the buyer later says *"Actually, make the property 50 feet wider,"* you don't just move the fence overnight; you convene a formal review, evaluate the legal impact, and issue an amendment. That is **Change Management**.
+Imagine buying a plot of land. Before you hand over 500,000 USD, you have a land surveyor verify the boundary markers, a title company verify zero outstanding liens, and a city zoning officer confirm you are legally allowed to build there. That is **Requirements Validation**. Once approved, if the buyer later says *"Actually, make the property 50 feet wider,"* you don't just move the fence overnight; you convene a formal review, evaluate the legal impact, and issue an amendment. That is **Change Management**.
 
 ---
 

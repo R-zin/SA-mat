@@ -18,7 +18,7 @@ def get_mod7():
                 "id": "spmp-metrics",
                 "title": "7.1 Software Project Management, SPMP & Size Metrics: LOC vs. Function Points",
                 "content": r"""### 🎯 Core Intuition ("Measuring a Novel by Word Count vs. Plot Complexity")
-Imagine an author hired to write a mystery thriller. The publisher says: *"We will pay you $10 for every page you write."* 
+Imagine an author hired to write a mystery thriller. The publisher says: *"We will pay you 10 USD for every page you write."* 
 What does the author do? They write long, rambling, repetitive paragraphs full of filler words to inflate the page count! That is what happens when you measure software size by **Lines of Code (LOC)**: it penalizes concise, elegant programmers and rewards verbose, copy-pasting coders.
 
 Instead, what if the publisher pays based on the number of complex plot twists, character arcs, and mystery clues? That is **Albrecht's Function Point (FP) Metric**. It measures what the software actually *does for the user*, completely independent of whether it was written in Python, C++, or Java!

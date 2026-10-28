@@ -35,7 +35,7 @@ A dormant fault in code does NOT become a failure until execution touches that e
 #### The Hospital System Billing Example (From Course Slides):
 - *The Error:* The developer thinks appointment consultation tax is $10\\%$ instead of $5\\%$.
 - *The Fault:* The developer types `taxRate = 0.10;` in `BillingService.java`.
-- *The Failure:* At month-end, 10,000 patients are billed an extra $50, causing a financial audit crisis!
+- *The Failure:* At month-end, 10,000 patients are billed an extra 50 USD, causing a financial audit crisis!
 
 ---
 
@@ -93,9 +93,9 @@ Can we ever test a program 100% to prove it has zero bugs?
                 "id": "blackbox-testing",
                 "title": "6.2 Black-Box Testing: Equivalence Partitioning & Boundary Value Analysis",
                 "content": """### 🎯 Core Intuition ("The Vending Machine & The Edge of the Cliff")
-Imagine testing a vending machine that accepts coins between $1 and $10:
-- You don't need to insert 10,000 different shiny $5 coins. If one $5 coin works, all $5 coins work! You divide inputs into buckets (**Equivalence Class Partitioning**).
-- Where do things break in real life? At the edges! When you put in a $0 coin (too low), a $1 coin (exact min boundary), a $10 coin (exact max boundary), or an $11 coin (too high). Mechanical gears and code logic fail at the borders (**Boundary Value Analysis**).
+Imagine testing a vending machine that accepts coins between 1 USD and 10 USD:
+- You don't need to insert 10,000 different shiny 5-dollar coins. If one 5-dollar coin works, all 5-dollar coins work! You divide inputs into buckets (**Equivalence Class Partitioning**).
+- Where do things break in real life? At the edges! When you put in a 0-dollar coin (too low), a 1-dollar coin (exact min boundary), a 10-dollar coin (exact max boundary), or an 11-dollar coin (too high). Mechanical gears and code logic fail at the borders (**Boundary Value Analysis**).
 
 ---
 
@@ -108,10 +108,10 @@ ECP is a foundational black-box testing technique that partitions the input doma
 
 #### The Commission Problem Case Study (Slide Highlight):
 A sales agent sells three items:
-- Locks ($45 each, limit: 1 to 70 per month)
-- Stocks ($30 each, limit: 1 to 80 per month)
-- Barrels ($25 each, limit: 1 to 90 per month)
-- Commission tiers: $10\\%$ on sales up to $1,000; $15\\%$ on sales between $1,000 and $1,800; $20\\%$ on sales exceeding $1,800.
+- Locks (45 USD each, limit: 1 to 70 per month)
+- Stocks (30 USD each, limit: 1 to 80 per month)
+- Barrels (25 USD each, limit: 1 to 90 per month)
+- Commission tiers: $10\\%$ on sales up to 1,000 USD; $15\\%$ on sales between 1,000 and 1,800 USD; $20\\%$ on sales exceeding 1,800 USD.
 - *Input Equivalence Classes:*
   - Valid: $\\text{Locks} \\in [1, 70]$, $\\text{Stocks} \\in [1, 80]$, $\\text{Barrels} \\in [1, 90]$.
   - Invalid: $\\text{Locks} < 1$, $\\text{Locks} > 70$, non-numeric values, negative quantities.
